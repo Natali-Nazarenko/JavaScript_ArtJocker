@@ -9,14 +9,14 @@ function verifyAnagramsRecurcion(string1, string2, i) {
             if (string1[i] === string2[i]) {
                 return verifyAnagramsRecurcion(string1, string2, ++i);
             }
-                return false;
+            return false;
         } else {
             if (string1.length === string2.length) {
                 let wordArray1 = string1.split('').sort();
                 let wordArray2 = string2.split('').sort();
                 return verifyAnagramsRecurcion(wordArray1, wordArray2, i);
             }
-                return false;
+            return false;
         }
     }
     return true;
@@ -161,13 +161,13 @@ function fibonacciRec(number, i, arrNumbersFibonacci) {
     if (number === 0 || number === 1) {
         return number;
     } else {
-            if (i < number) {
-                arrNumbersFibonacci[i] = arrNumbersFibonacci[i - 2] + arrNumbersFibonacci[i - 1];
-                return fibonacciRec(number, ++i, arrNumbersFibonacci)
-            } else {
-                return arrNumbersFibonacci;
-            }
+        if (i < number) {
+            arrNumbersFibonacci[i] = arrNumbersFibonacci[i - 2] + arrNumbersFibonacci[i - 1];
+            return fibonacciRec(number, ++i, arrNumbersFibonacci)
+        } else {
+            return arrNumbersFibonacci;
         }
+    }
 }
 
 //#8 Вычислить факториал числа
@@ -718,7 +718,37 @@ function sumTwoMatrix(matrixFirst, matrixSecond, i, j) {
 //#17 Удалить из двумерного массива строку в которой присутствует хотя бы один нулевой элемент.
 
 
+function deleteLineWithZeroElement(matrix, i) {
+    i = i || 0;
 
-//Для столбца аналогично реализовать. 
+    if (i < matrix.length) {
+        for (let j = 0; j < matrix[0].length; j++) {
+            if (matrix[i][j] === 0) {
+                matrix.splice(i, 1);
+                --i;
+                break;
+            }
+        }
+        return deleteLineWithZeroElement(matrix, ++i);
+    }
 
+    return matrix;
+}
 
+function deleteColumnWithZeroElement(matrix, i) {
+    i = i || 0
+
+    if (i < matrix.length) {
+        for (let j = 0; j < matrix[0].length; j++) {
+
+            if (matrix[j][i] === 0) {
+                for (let k = 0; k < matrix.length; k++) {
+                    matrix[k].splice(i, 1);
+                }
+                break;
+            }
+        }
+        return deleteColumnWithZeroElement(matrix, ++i);
+    }
+    return matrix;
+}

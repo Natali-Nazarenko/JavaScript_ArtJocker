@@ -497,9 +497,7 @@ function transpositionMatrix(matrix) {
 
 //exercise №16 Сложить две матрицы
 
-function sumTwoMatrix() {
-    const matrixFirst = [[1, 1, 1], [1, 1, 1], [1, 1, 1]];
-    const matrixSecond = [[2, 2, 2], [2, 2, 2], [2, 2, 2]];
+function sumTwoMatrix(matrixFirst, matrixSecond) {
     for (let i = 0; i < matrixFirst.length; i++) {
         for (let j = 0; j < matrixFirst.length; j++) {
             matrixFirst[i][j] += matrixSecond[i][j];
@@ -508,28 +506,27 @@ function sumTwoMatrix() {
     return matrixFirst;
 }
 
-
-
-
 //exercise №17 Удалить из двумерного массива строку в которой присутствует хотя бы один нулевой элемент. Для столбца аналогично реализовать.
 
-/* function deleteLineWithZeroElement(matrix) {
+function deleteLineWithZeroElement(matrix) {
     for (let i = 0; i < matrix.length; i++) {
         for (let j = 0; j < matrix[0].length; j++) {
+
             if (matrix[i][j] === 0) {
                 matrix.splice(i, 1);
-                i = -1;
+                --i;
                 break;
             }
         }
     }
     return matrix;
-} */
+}
 
 function deleteColumnWithZeroElement(matrix) {
     for (let i = 0; i < matrix.length; i++) {
         for (let j = 0; j < matrix[0].length; j++) {
-            if (matrix[j][i] == 0) {
+
+            if (matrix[j][i] === 0) {
                 for (let k = 0; k < matrix.length; k++) {
                     matrix[k].splice(i, 1);
                 }
@@ -539,4 +536,4 @@ function deleteColumnWithZeroElement(matrix) {
     }
     return matrix;
 }
-// console.log(deleteColumnWithZeroElement([[1, 0, 3, 4], [1, 2, 3, 4], [1, 2, 3, 0], [1, 2, 3, 4]]))
+s
