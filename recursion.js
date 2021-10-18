@@ -1,3 +1,5 @@
+"use strict"
+
 //#1 Написать функцию которая проверяет являются ли две строки анаграммой или нет
 
 function verifyAnagramsRecurcion(string1, string2, i) {
@@ -6,17 +8,15 @@ function verifyAnagramsRecurcion(string1, string2, i) {
         if (string1 instanceof Array && string2 instanceof Array) {
             if (string1[i] === string2[i]) {
                 return verifyAnagramsRecurcion(string1, string2, ++i);
-            } else {
-                return false;
             }
+                return false;
         } else {
             if (string1.length === string2.length) {
                 let wordArray1 = string1.split('').sort();
                 let wordArray2 = string2.split('').sort();
                 return verifyAnagramsRecurcion(wordArray1, wordArray2, i);
-            } else {
-                return false;
             }
+                return false;
         }
     }
     return true;
@@ -158,13 +158,9 @@ function fibonacciRec(number, i, arrNumbersFibonacci) {
     i = i || 2;
     arrNumbersFibonacci = arrNumbersFibonacci || [0, 1];
 
-    if (number === 0) {
-        return [];
-
-    } else
-        if (number === 1) {
-            return arrNumbersFibonacci[0];
-        } else {
+    if (number === 0 || number === 1) {
+        return number;
+    } else {
             if (i < number) {
                 arrNumbersFibonacci[i] = arrNumbersFibonacci[i - 2] + arrNumbersFibonacci[i - 1];
                 return fibonacciRec(number, ++i, arrNumbersFibonacci)
@@ -312,7 +308,7 @@ function amountSimpleElements(arrayNumbers, i, amountSimple, countDenominator) {
             if (countDenominator == 0) {
                 amountSimple++;
             }
-        }        
+        }
         return amountSimpleElements(arrayNumbers, ++i, amountSimple, countDenominator);
     } else {
         return amountSimple;
@@ -557,8 +553,8 @@ function sumRangeMinMaxOnlyPositive(min, max, sumOnlyPositiveElements) {
         if (min > 0) {
             sumOnlyPositiveElements += min;
             return sumRangeMinMaxOnlyPositive(++min, max, sumOnlyPositiveElements);
-        }else{
-        return sumRangeMinMaxOnlyPositive(++min, max, sumOnlyPositiveElements);
+        } else {
+            return sumRangeMinMaxOnlyPositive(++min, max, sumOnlyPositiveElements);
         }
     } else {
         return sumOnlyPositiveElements;
@@ -678,7 +674,7 @@ function meanDimensionalArrayUnevenElem(matrix, i, j, meanUnevenElem, countUneve
 function transpositionMatrix(array, newDimensionalArray, i, j, k) {
     i = i || 0;
     j = j || 0;
-    k = k || 0
+    k = k || 0;
     newDimensionalArray = newDimensionalArray || [];
 
     if (newDimensionalArray.length == array.length) {
@@ -706,8 +702,6 @@ function transpositionMatrix(array, newDimensionalArray, i, j, k) {
 function sumTwoMatrix(matrixFirst, matrixSecond, i, j) {
     i = i || 0;
     j = j || 0;
-    matrixFirst = matrixFirst || [[1, 1, 1], [1, 1, 1], [1, 1, 1]];
-    matrixSecond = matrixSecond || [[2, 2, 2], [2, 2, 2], [2, 2, 2]];
 
     if (i < matrixFirst.length) {
         if (j == matrixFirst.length) {
@@ -721,77 +715,10 @@ function sumTwoMatrix(matrixFirst, matrixSecond, i, j) {
         return matrixFirst;
     }
 }
+//#17 Удалить из двумерного массива строку в которой присутствует хотя бы один нулевой элемент.
 
-//#17 Удалить из двумерного массива строку в которой присутствует хотя бы один нулевой элемент. Для столбца аналогично реализовать.
 
-function deleteLineWithZeroElement(matrix, i, j, newMatrixWithoutZeroElementLine, lineHasZeroElement) {
-    // debugger;
-    i = i || 0;
-    j = j || 0;
-    newMatrixWithoutZeroElementLine = newMatrixWithoutZeroElementLine || [];
-    lineHasZeroElement = lineHasZeroElement || false;
-    if (i < matrix.length) {
-        if (j == matrix.length) {
-            j = 0;
-            return deleteLineWithZeroElement(matrix, ++i, j, newMatrixWithoutZeroElementLine, lineHasZeroElement);
-        } else {
-            if (matrix[i][j] === 0) {
-                lineHasZeroElement = true;
-                return deleteLineWithZeroElement(matrix, ++i, j=0, newMatrixWithoutZeroElementLine, lineHasZeroElement);
-            } else {
-                if (j == matrix.length - 1 && !lineHasZeroElement) {
-                    newMatrixWithoutZeroElementLine.push(matrix[i]);
-                    lineHasZeroElement = false;
-                    return deleteLineWithZeroElement(matrix, i, ++j, newMatrixWithoutZeroElementLine, lineHasZeroElement);
-                }
-            }
-            lineHasZeroElement = false;
-            return deleteLineWithZeroElement(matrix, i, ++j, newMatrixWithoutZeroElementLine, lineHasZeroElement);
-        }
-    } else {
-        return newMatrixWithoutZeroElementLine;
-    }
-}
 
 //Для столбца аналогично реализовать. 
 
-function deleteColumnWithZeroElement(matrix, i, j, k, newMatrix, count, temp) {
-    // debugger;
-    i = i || 0;
-    j = j || 0;
-    k = k || 0;
-    newMatrix = newMatrix || [];
-    count = count || 0;
-    temp = temp || 0;
-    if (newMatrix.length === matrix.length) {
-        if (i < matrix.length) {
-            if (j == matrix.length) {
-                if (count == matrix.length) {
-                    for (let l = 0; l < matrix.length; l++) {
-                        newMatrix[l][temp] = matrix[l][i];
-                    }
-                    temp++;
-                }
-                count = 0;
-                j = 0;
-                return deleteColumnWithZeroElement(matrix, ++i, j, k, newMatrix, count, temp);
-            } else {
-                if (matrix[j][i] != 0) {
-                    count++;
-                    return deleteColumnWithZeroElement(matrix, i, ++j, k, newMatrix, count, temp);
-                }else {
-                    j = 0;
-                    count = 0;
-                return deleteColumnWithZeroElement(matrix, ++i, j, k, newMatrix, count, temp);
-            }
-            }
-        } else {
-            return newMatrix;
-        }
-    } else {
-        if (k < matrix.length) {
-            newMatrix.push([]);
-            return deleteColumnWithZeroElement(matrix, i, j, ++k, newMatrix, count, temp);
-        }
-    }
-}
+

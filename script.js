@@ -13,11 +13,7 @@ function verifyAnagrams(word1, word2) {
                 equalCount++;
             }
         }
-        if (equalCount == word1.length) { //если счетчик равен длине строки, то строки явл. анаграммами
-            return true;
-        } else {
-            return false;
-        }
+        return equalCount == word1.length;//если счетчик равен длине строки, то строки явл. анаграммами
     }
     return false;
 }
@@ -59,10 +55,10 @@ function findUniqueWords(sentence) {
                 count++;
             }
         }
-        if(count == 1) {
-                uniqueCount++;
-            }
-            count = 0;
+        if (count == 1) {
+            uniqueCount++;
+        }
+        count = 0;
     }
     return uniqueCount;
 }
@@ -78,15 +74,14 @@ function calculateUniqueWords(newSentence) {
 
     spaceArray = newSentence.split(regPhrase); // удаляем из предложения символы отличные от букв и записываем оставшиеся слова в массив
 
-    //перебираем массив. Если есть одинаковые слова, увеличиваем счетчик
     for (let i = 0; i < spaceArray.length; i++) {
         for (let j = 0; j < spaceArray.length; j++) {
             if (spaceArray[i] == spaceArray[j]) {
                 uniqueCount++;
             }
         }
-            wordsUniqueArray[spaceArray[i]] = uniqueCount; //записываем слово и его кол-во вхождений в предложении в объект
-            uniqueCount = 0;
+        wordsUniqueArray[spaceArray[i]] = uniqueCount; //записываем слово и его кол-во вхождений в предложении в объект
+        uniqueCount = 0;
     }
     return wordsUniqueArray;
 }
@@ -95,10 +90,8 @@ function calculateUniqueWords(newSentence) {
 
 function fibonacci(number) {
     const arrNumbersFibonacci = [0, 1];
-    if (number == 0) {
-        return [];
-    } else if (number == 1) {
-        return arrNumbersFibonacci[number - 1];
+    if (number === 0 || number == 1) {
+        return number;
     } else {
         for (let i = 2; i < number; i++) {
             arrNumbersFibonacci[i] = arrNumbersFibonacci[i - 2] + arrNumbersFibonacci[i - 1];
@@ -109,32 +102,39 @@ function fibonacci(number) {
 
 //exercise №7 Вычислить периметр и площадь для прямоугольника, треугольника и круга
 
-function perimetrCircle(side) {
-    return (2 * Math.PI * side);
-}
+class PerimetrVsSquare {
+    constructor(side1, side2, side3) {
+        this.side1 = side1;
+        this.side2 = side2;
+        this.side3 = side3;
+    }
 
-function squareCircle(side) {
-    return (Math.PI*(side*side));
-}
+    perimetrCircle() {
+        return (2 * Math.PI * this.side1);
+    };
 
-function perimetrRectangle(side1, side2) {
-return (2 * (side1 + side2));
-}
+    perimetrRectangle() {
+        return (2 * (this.side1 + this.side2));
+    };
 
-function squareRectangle(side1, side2) {
-return (side1*side2);
-}
+    perimetrsquareTriangle() {
+        return (this.side1 + this.side2 + this.side3);
+    };
 
-function perimetrsquareTriangle(side1, side2, side3) {
-return (side1 + side2 + side3);
-}
+    squareCircle() {
+        return (Math.PI * (this.side1 * this.side1));
+    };
 
-function squareTriangle(side1, side2, side3) {
-    let semiPerimeter  = (side1 + side2 + side3) / 2;
-return (Math.sqrt(semiPerimeter * (semiPerimeter - side1) * (semiPerimeter - side2) * (semiPerimeter - side3)));
-}
+    squareRectangle() {
+        return (this.side1 * this.side2);
+    };
 
-
+    squareTriangle() {
+        let semiPerimeter = (this.side1 + this.side2 + this.side3) / 2;
+        console.log('semiPerimeter: ', semiPerimeter)
+        return (Math.sqrt(semiPerimeter * (semiPerimeter - this.side1) * (semiPerimeter - this.side2) * (semiPerimeter - this.side3)));
+    };
+};
 
 //exercise №8 Вычислить факториал числа
 
@@ -144,34 +144,25 @@ function factorialCalculation(numberForFactorial) {
         for (let i = 1; i < numberForFactorial + 1; i++) {
             factorialResult = factorialResult * i;
         }
-        return `factorial ${numberForFactorial}! = ${factorialResult}`;
+        return factorialResult;
     } else if (numberForFactorial === 0) {
-        return `factorial 0! = 1`;
+        factorialResult = 1;
+        return factorialResult;
     }
 }
 
 //exercise №9 Посчитать сумму всех элементов массива, только тех которые 
 //(Кратные двум, кратные трем, только положительные и нечетные)
 
-function sumElementsMultipleTwo(arrayNumbers) {
-    let sumMultipleTwo = 0;
+function sumElementsMultipleX(arrayNumbers, x) {
+    let sumMultipleX = 0;
     for (let i = 0; i < arrayNumbers.length; i++) {
 
-        if (arrayNumbers[i] % 2 == 0) {
-            sumMultipleTwo += arrayNumbers[i];
+        if (arrayNumbers[i] % x == 0) {
+            sumMultipleX += arrayNumbers[i];
         }
     }
-    return sumMultipleTwo;
-}
-
-function sumElementsMultipleThree(arrayNumbers) {
-    let sumMultipleThree = 0;
-    for (let i = 0; i < arrayNumbers.length; i++) {
-        if (arrayNumbers[i] % 3 == 0) {
-            sumMultipleThree += arrayNumbers[i];
-        }
-    }
-    return sumMultipleThree;
+    return sumMultipleX;
 }
 
 function sumElementsOnlyPositive(arrayNumbers) {
@@ -266,45 +257,34 @@ function binaryNumberConversToDecimalNumber(binaryNumber) {
     let sumDegree = 0;
     let arrayDegree = [];
     let stringNumber = String(binaryNumber);
-    for(let i = 0; i < stringNumber.length; i++) {
+    for (let i = 0; i < stringNumber.length; i++) {
         arrayDegree[i] = Math.pow(2, i);
     }
     arrayDegree.reverse();
-    for(let j = 0; j < arrayDegree.length; j++) {
-        if(stringNumber[j] == 1) {
+    for (let j = 0; j < arrayDegree.length; j++) {
+        if (stringNumber[j] == 1) {
             sumDegree += arrayDegree[j];
         }
     }
-    return  sumDegree;
+    return sumDegree;
 }
 
 //exercise №12 Пункты 9 и 10 выполнить для двумерных массивов
 
 //(Кратные двум, кратные трем, только положительные и нечетные)
 
-function sumElemMatrixMultipleTwo(matrix) {
-    let sumElemMultipleTwo = 0;
+function sumElemMatrixMultipleX(matrix, x) {
+    let sumElemMultipleX = 0;
     for (let i = 0; i < matrix.length; i++) {
         for (let j = 0; j < matrix.length; j++) {
-            if (matrix[i][j] % 2 == 0) {
-                sumElemMultipleTwo += matrix[i][j];
+            if (matrix[i][j] % x == 0) {
+                sumElemMultipleX += matrix[i][j];
             }
         }
     }
-    return sumElemMultipleTwo;
+    return sumElemMultipleX;
 }
 
-function sumElemMatrixMultipleThree(matrix) {
-    let sumElemMultipleThree = 0;
-    for (let i = 0; i < matrix.length; i++) {
-        for (let j = 0; j < matrix.length; j++) {
-            if (matrix[i][j] % 3 == 0) {
-                sumElemMultipleThree += matrix[i][j];
-            }
-        }
-    }
-    return sumElemMultipleThree;
-}
 
 function sumElemMatrixOnlyUneven(matrix) {
     let sumOnlyUneven = 0;
@@ -407,74 +387,78 @@ function sumRangeMinMaxMultiplesThree(min, max) {
             sumMultiplesThree += i;
         }
     }
-return sumMultiplesThree;
+    return sumMultiplesThree;
 }
 
 function sumRangeMinMaxOnlyPositive(min, max) {
     let sumOnlyPositiveElements = 0;
     for (let i = min; i <= max; i++) {
-        if(i > 0) {
+        if (i > 0) {
             sumOnlyPositiveElements += i;
         }
     }
-return sumOnlyPositiveElements;
+    return sumOnlyPositiveElements;
 }
 
 //exercise №14 Найти среднее значение всех элементов одномерного/двумерного массива (Среднее только тех которые четные и которые не четные)
 
-function meanSingleArrayAllElem(arrElements) {
+function sumElem(a, b) {
+    return a + b;
+}
+
+function meanSingleArrayAllElem(arrElements, callback) {
     let meanAllElem = 0;
     let countAll = 0;
     for (let i = 0; i < arrElements.length; i++) {
-        meanAllElem += arrElements[i];
+        meanAllElem = callback(meanAllElem, arrElements[i]);
         countAll++;
     }
     return meanAllElem / countAll;
 }
 
-function meanSingleArrayEvenElem(arrElements) {
+function meanSingleArrayEvenElem(arrElements, callback) {
     let meanEvenElem = 0;
     let countEven = 0;
     for (let i = 0; i < arrElements.length; i++) {
         if (arrElements[i] % 2 == 0) {
-            meanEvenElem += arrElements[i];
+            meanEvenElem = callback(meanEvenElem, arrElements[i]);
             countEven++;
         }
     }
     return meanEvenElem / countEven;
 }
 
-function meanSingleArrayUnevenElem(arrElements) {
+function meanSingleArrayUnevenElem(arrElements, callback) {
     let meanUnevenElem = 0;
     let countUneven = 0;
     for (let i = 0; i < arrElements.length; i++) {
         if (arrElements[i] % 2 != 0) {
-            meanUnevenElem += arrElements[i];
+            meanUnevenElem = callback(meanUnevenElem, arrElements[i]);
             countUneven++;
         }
     }
     return meanUnevenElem / countUneven;
 }
 
-function meanDimensionalArrayAllElem(matrix) {
+function meanDimensionalArrayAllElem(matrix, callback) {
     let meanAllElem = 0;
     let countAll = 0;
     for (let j = 0; j < matrix.length; j++) {
         for (let k = 0; k < matrix.length; k++) {
-            meanAllElem += matrix[j][k];
+            meanAllElem = callback(meanAllElem, matrix[j][k]);
             countAll++;
         }
     }
     return meanAllElem / countAll;
 }
 
-function meanDimensionalArrayEvenElem(matrix) {
+function meanDimensionalArrayEvenElem(matrix, callback) {
     let meanEvenElem = 0;
     let countEven = 0;
     for (let j = 0; j < matrix.length; j++) {
         for (let k = 0; k < matrix.length; k++) {
             if (matrix[j][k] % 2 == 0) {
-                meanEvenElem += matrix[j][k];
+                meanEvenElem = callback(meanEvenElem, matrix[j][k]);
                 countEven++;
             }
         }
@@ -482,13 +466,13 @@ function meanDimensionalArrayEvenElem(matrix) {
     return meanEvenElem / countEven;
 }
 
-function meanDimensionalArrayUnevenElem(matrix) {
+function meanDimensionalArrayUnevenElem(matrix, callback) {
     let meanUnevenElem = 0;
     let countUneven = 0;
     for (let j = 0; j < matrix.length; j++) {
         for (let k = 0; k < matrix.length; k++) {
             if (matrix[j][k] % 2 != 0) {
-                meanUnevenElem += matrix[j][k];
+                meanUnevenElem = callback(meanUnevenElem, matrix[j][k]);
                 countUneven++;
             }
         }
@@ -524,42 +508,35 @@ function sumTwoMatrix() {
     return matrixFirst;
 }
 
+
+
+
 //exercise №17 Удалить из двумерного массива строку в которой присутствует хотя бы один нулевой элемент. Для столбца аналогично реализовать.
 
-function deleteLineWithZeroElement(matrix) {
-    let newMatrixWithoutZeroElementLine = [];
+/* function deleteLineWithZeroElement(matrix) {
     for (let i = 0; i < matrix.length; i++) {
-        let lineHasZeroElement = false;
         for (let j = 0; j < matrix[0].length; j++) {
             if (matrix[i][j] === 0) {
-                lineHasZeroElement = true;
+                matrix.splice(i, 1);
+                i = -1;
+                break;
             }
         }
-        if (!lineHasZeroElement) {
-            newMatrixWithoutZeroElementLine.push(matrix[i])
-        }
     }
-    return newMatrixWithoutZeroElementLine;
-}
+    return matrix;
+} */
 
 function deleteColumnWithZeroElement(matrix) {
-    let newMatrixWithoutZeroElementColumn = [[],[],[],[]];
-    let count = 0;
-    let temp = 0;
     for (let i = 0; i < matrix.length; i++) {
         for (let j = 0; j < matrix[0].length; j++) {
-            if (matrix[j][i] != 0) {
-                count++;
+            if (matrix[j][i] == 0) {
+                for (let k = 0; k < matrix.length; k++) {
+                    matrix[k].splice(i, 1);
+                }
+                break;
             }
         }
-
-        if (count == matrix.length) {
-            for (let k = 0; k < matrix.length; k++) {
-                newMatrixWithoutZeroElementColumn[k][temp] = matrix[k][i];
-            }
-            temp++;
-        }
-        count = 0;
     }
-    return newMatrixWithoutZeroElementColumn;
+    return matrix;
 }
+// console.log(deleteColumnWithZeroElement([[1, 0, 3, 4], [1, 2, 3, 4], [1, 2, 3, 0], [1, 2, 3, 4]]))
