@@ -135,6 +135,8 @@ class PerimetrVsSquare {
         return (Math.sqrt(semiPerimeter * (semiPerimeter - this.side1) * (semiPerimeter - this.side2) * (semiPerimeter - this.side3)));
     };
 };
+let foo = new PerimetrVsSquare(1,2,3);
+console.log(foo.squareCircle())
 
 //exercise №8 Вычислить факториал числа
 
@@ -536,4 +538,3 @@ function deleteColumnWithZeroElement(matrix) {
     }
     return matrix;
 }
-s
