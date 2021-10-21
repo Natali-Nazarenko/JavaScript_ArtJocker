@@ -121,7 +121,7 @@ let objFibonacciIterator = {
 
 for (let num of objFibonacciIterator) {
     console.log(num);
-}
+};
 
 //генератор
 
@@ -134,13 +134,13 @@ function* generateFibonacci() {
         second = current + first;
         yield current;
     }
-}
+};
 
 let generator = generateFibonacci();
 
 for (let i = 0; i < 10; i++) {
     console.log(generator.next().value);
-}
+};
 
 //итератор + генератор
 
