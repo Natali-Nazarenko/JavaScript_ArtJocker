@@ -1,7 +1,7 @@
 "use strict"
 
 const memoization = (data) => {
-    // debugger
+    debugger
     let cache = {};
     return (...n) => {
 
@@ -170,7 +170,7 @@ const findAmountWordsRec = memoization((sentence, i, j, wordsUniqueObj, count) =
 //#6  Написать функцию которая возвращает N первых чисел фибоначчи
 
 const fibonacciRec = memoization((number, i, arrNumbersFibonacci) => {
-    // debugger;
+    debugger;
     i = i || 2;
     arrNumbersFibonacci = arrNumbersFibonacci || [0, 1];
 
@@ -186,6 +186,10 @@ const fibonacciRec = memoization((number, i, arrNumbersFibonacci) => {
         }
     }
 });
+console.log(fibonacciRec(6))
+console.log(fibonacciRec(7))
+console.log(fibonacciRec(5))
+
 
 //#8 Вычислить факториал числа
 
@@ -768,3 +772,4 @@ const deleteColumnWithZeroElement = memoization((matrix, i) => {
     }
     return matrix;
 });
+ 
