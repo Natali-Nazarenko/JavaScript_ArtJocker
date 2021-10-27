@@ -24,7 +24,7 @@ const validateEmail = (string) => {
 
 const validateSite = (string) => {
 
-    let regularPattern = new RegExp(/^(http):\/\/(test)\.(dev)$/);
+    let regularPattern = new RegExp(/^((http\:\/\/)?|(https\:\/\/))?([a-zA-Z0-9-_.])+([a-zA-Z0-9-_])+\.[a-zA-Z]{2,6}$/);
 
     return string.search(regularPattern);
 }
@@ -45,7 +45,7 @@ function validatePassword(string) {
 
 function validateIPV4(string) {
 
-    let regularPattern = new RegExp(/^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})$/);
+    let regularPattern = new RegExp(/^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9])$/);
 
     return string.search(regularPattern);
 }
