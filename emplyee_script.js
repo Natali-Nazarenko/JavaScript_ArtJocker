@@ -28,7 +28,7 @@ const departments = [
 const employees = [
     {
         id: 1,
-        numberDepartment: 2,
+        numberDepartment: 1,
         name: 'Денис',
         surname: 'Хрущ',
         salary: 41000.0,
@@ -193,7 +193,7 @@ const employees = [
         numberDepartment: 4,
         name: 'Максим',
         surname: 'Сток',
-        salary: 14100.0,
+        salary: 14000.0,
         fired: false,
         post: 'security guard'
     },

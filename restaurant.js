@@ -5,7 +5,7 @@ class Restaurant {
     };
 
     getSumSalarysDepartments() {
-        const allSumSalarysDepartments = [];
+        const sumAllSalarysDepartments = [];
 
         for (let item of this.departments) {
             let sumAndDepartmens = {};
@@ -20,10 +20,10 @@ class Restaurant {
             sumAndDepartmens = {
                 [item.name]: sumSalarys,
             }
-            allSumSalarysDepartments.push(sumAndDepartmens);
+            sumAllSalarysDepartments.push(sumAndDepartmens);
         }
 
-        return allSumSalarysDepartments;
+        return sumAllSalarysDepartments;
     };
 
     getMiddleSalaryDepartment(department) {
@@ -40,7 +40,7 @@ class Restaurant {
             }
         }
 
-        return ~~(sumSalarys / count);
+        return Math.floor(sumSalarys / count);
     };
 
     getMinimalSalaryDepartment(department) {
@@ -103,11 +103,11 @@ class Restaurant {
         return topSalary;
     };
 
-    getAmountFiredEmployees() {
+    getAmountFiredEmployees(isFired) {
         let count = 0;
         for (let item of this.employees) {
 
-            if (item.fired) {
+            if (item.fired === isFired) {
                 count++;
             }
         }
@@ -140,7 +140,7 @@ class Restaurant {
 
         for (let data of this.departments) {
 
-            if (data.name === department) {
+            if (data.name.toLowerCase() === department.toLowerCase()) {
                 numberDepartment = data.number;
                 break;
             }
@@ -151,11 +151,3 @@ class Restaurant {
 };
 
 const restaurant = new Restaurant();
-console.log(restaurant.getSumSalarysDepartments());
-console.log(restaurant.getMiddleSalaryDepartment('Saloon'));
-console.log(restaurant.getMinimalSalaryDepartment('Kitchen'));
-console.log(restaurant.getTopSalaryDepartment('Kitchen'));
-console.log(restaurant.getMinimalSalaryPost('chef'));
-console.log(restaurant.getTopSalaryPost('cook'));
-console.log(restaurant.getAmountFiredEmployees());
-console.log(restaurant.getDepartmentWithoutHead());
