@@ -29,30 +29,26 @@ class BinaryTree {
     }
 
     add(node, newNode) {//добавление нового узла
+        // debugger
 
         if (node.value > newNode.value) {
-
             if (node.left === null) {
                 node.left = newNode;
             } else {
-
                 return this.add(node.left, newNode);
             }
         } else {
-
             if (node.right === null) {
                 node.right = newNode;
+            } else {
+                return this.add(node.right, newNode);
             }
-
-            return this.add(node.right, newNode);
         }
 
         return node;
     }
 
     search(element, node) {//поиск заданного узла
-        // debugger
-
         if (node === null) {
             return null;
         }
@@ -70,54 +66,6 @@ class BinaryTree {
         return node;
     }
 
-    findParent(element, nodeParent) {//поиск родителя, удаляемого узла
-        //debugger
-        nodeParent = nodeParent || this.root;
-
-        if (element === nodeParent.value) {
-
-            return nodeParent;
-        } else if (nodeParent.left != null && nodeParent.right != null) {
-
-            if ((element === nodeParent.right.value) || (element === nodeParent.left.value)) {
-
-                return nodeParent;
-            } else if (element < nodeParent.value) {
-
-                return this.findParent(element, nodeParent.left);
-            } else if (element > nodeParent.value) {
-
-                return this.findParent(element, nodeParent.right);
-            }
-        } else if (nodeParent.left === null && element != nodeParent.right) {
-
-            if (element === nodeParent.right.value) {
-
-                return nodeParent;
-            } else if (element < nodeParent.value) {
-
-                return this.findParent(element, nodeParent.left);
-            } else if (element > nodeParent.value) {
-
-                return this.findParent(element, nodeParent.right);
-            }
-        } else if (nodeParent.right === null && element != nodeParent.left) {
-
-            if (element === nodeParent.left.value) {
-
-                return nodeParent;
-            } else if (element < nodeParent.value) {
-
-                return this.findParent(element, nodeParent.left);
-            } else if (element > nodeParent.value) {
-
-                return this.findParent(element, nodeParent.right);
-            }
-        }
-
-        return nodeParent;
-    }
-
     findMinimalNode(node) {//поиск минимального узла в левых ветках
         // debugger
         if (node.left === null) {
@@ -127,55 +75,37 @@ class BinaryTree {
         return this.findMinimalNode(node.left);
     }
 
-    delete(element) {
+    delete(element, node) {
         // debugger
-        let nodeParent = this.findParent(element);
-        let node = this.search(element);
+        node = node || this.root;
 
-        //удаление узла без потомков
-        if (node.left === null && node.right === null) {
-
-            if (nodeParent.left === null && nodeParent.right.value === node.value) {
-                nodeParent.right = null;
-
-                return nodeParent;
+        if (node === null) {
+            return null;
+        } else if (element < node.value) {
+            node.left = this.delete(element, node.left);
+            return node;
+        } else if (element > node.value) {
+            node.right = this.delete(element, node.right);
+            return node;
+        } else {
+            if (node.left === null && node.right === null) {
+                node = null;
+                return node;
             }
-            nodeParent.left = null;
-
-            return nodeParent;
+            if (node.left === null) {
+                node = node.right;
+                return node;
+            } else if (node.right === null) {
+                node = node.left;
+                return node;
+            }
         }
 
-        //удаление узла с одним потомком
-        if (node.left === null) {
-
-            if (nodeParent.value > node.value) {
-                nodeParent.left = node.right;
-
-                return nodeParent;
-            }
-            nodeParent.right = node.right;
-
-            return nodeParent;
-        }
-        
-        if (node.right === null) {
-
-            if (nodeParent.value > node.value) {
-                nodeParent.left = node.left;
-
-                return nodeParent;
-            }
-            nodeParent.right = node.left;
-
-            return nodeParent;
-        }
-
-        //удаление узла с двумя потомками
         let minNode = this.findMinimalNode(node.right);
-        this.delete(minNode.value);
         node.value = minNode.value;
+        node.right = this.delete(minNode.value, node.right);
 
-        return node;
+        return minNode;
     }
 
 }
