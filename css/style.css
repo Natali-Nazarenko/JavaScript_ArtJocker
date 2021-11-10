@@ -1,0 +1,200 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: auto;
+  background: url(../img/kitchen2.jpg);
+  background-size: 100% 100%;
+  background-attachment: local;
+}
+
+ul {
+  padding-left: 15px;
+}
+
+li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 5px;
+  cursor: pointer;
+}
+
+li .removeChoiceButton {
+  width: 15px;
+  height: 15px;
+  visibility: hidden;
+}
+
+li .removeChoiceButton::after {
+  content: "\2716";
+}
+
+li .removeChoiceButton.active {
+  visibility: visible;
+}
+
+header #button {
+  opacity: 0;
+}
+
+header #button:checked ~ .menuBlock {
+  visibility: visible;
+}
+
+header #button:checked ~ .burgerMenu > span:before {
+  font-size: x-large;
+  content: "\2716";
+}
+
+header #button:checked ~ .burgerMenu {
+  z-index: 3;
+}
+
+header .title {
+  color: white;
+  text-align: center;
+  font-size: xx-large;
+  font-family: fantasy;
+}
+
+header .burgerMenu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: fixed;
+  top: 20px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+  color: white;
+  cursor: pointer;
+  z-index: 1;
+}
+
+header .burgerMenu span::before {
+  font-size: x-large;
+  content: "\2630";
+}
+
+header .menuBlock {
+  display: block;
+  position: fixed;
+  visibility: hidden;
+  top: 0;
+  left: 0;
+  width: 180px;
+  height: 100%;
+  margin: 0;
+  padding: 70px 0 5px;
+  text-align: left;
+  background-color: #dfeef8;
+  z-index: 2;
+}
+
+header .menuBlock .departmens {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0 20px;
+}
+
+header .menuBlock .dropdownMenuButton {
+  width: 15px;
+  height: 20px;
+}
+
+header .menuBlock .dropdownMenuButton::before {
+  font-weight: 900;
+  font-size: x-large;
+  content: "\005E";
+}
+
+header .menuBlock .dropdownMenuButton.active {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+header .menuBlock .blockChoice {
+  display: none;
+  border-bottom: 1px solid #dddada;
+}
+
+header .menuBlock .blockChoice.active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 2px;
+}
+
+.main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main .card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 230px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 20px 10px 0;
+  border-radius: 15px;
+  border: 1px solid #dddada;
+  -webkit-box-shadow: 0 0 5px #dddada;
+          box-shadow: 0 0 5px #dddada;
+  background-color: whitesmoke;
+}
+
+.main .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+/*# sourceMappingURL=style.css.map */
