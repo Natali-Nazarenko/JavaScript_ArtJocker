@@ -212,7 +212,7 @@ const employees = [
         name: 'Инна',
         surname: 'Светолина',
         salary: 8600.0,
-        fired: true,
+        fired: false,
         post: 'cleaner'
     },
     {
@@ -221,7 +221,7 @@ const employees = [
         name: 'Света',
         surname: 'Егорина',
         salary: 8600.0,
-        fired: true,
+        fired: false,
         post: 'cleaner'
     },
     {
